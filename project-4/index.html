@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Password</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate a <br> <span>Random Password</span> </h1>
+        <div class="display">
+            <input type="text" id="password" placeholder="Random Password">
+            <img src="images/copy.png" alt="" onclick="copyPassword()">
+        </div>
+        <button> <img src="images/generate.png" alt=""> Generate Password</button>
+    </div>
+
+    <script>
+        const passwordBox = document.getElementById('password');
+        const btn = document.querySelector("button")
+        const lenght = 12;
+
+        const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        const  lowerCase = "abcdefghijklmnovqrstuvwxyz";
+        const number = "0123456789";
+        const symbol = "@#$%^&*!?(){}[]";
+        const allChars = upperCase + lowerCase + number + symbol;
+        function createPassword(){
+            let pass = ""
+            pass += upperCase[Math.floor(Math.random() * upperCase.length)];
+            pass += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+            pass += number[Math.floor(Math.random() * number.length)];
+            pass += symbol[Math.floor(Math.random() * symbol.length)];
+            while(lenght > pass.length){
+                pass += allChars[Math.floor(Math.random() * allChars.length)]
+            }
+            passwordBox.value = pass;
+        }
+        btn.addEventListener("click", () => {
+           createPassword();
+        })
+        function copyPassword(){
+            passwordBox.select();
+            document.execCommand("copy");
+        }
+    </script>
+</body>
+</html>
